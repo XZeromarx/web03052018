@@ -1,4 +1,5 @@
-CREATE DATABASE bd_web;
+CREATE DATABASE bd_web; -- drop database bd_web;
+                        -- USE mysql;
 
 USE bd_web;
 
@@ -16,7 +17,7 @@ nombre VARCHAR(100),
 PRIMARY KEY (id)
 );
 
-CREATE TABLE persona_etiqueta(
+CREATE TABLE persona_etiqueta( -- SELECT * FROM persona_etiqueta
 id INT AUTO_INCREMENT,
 id_persona int,
 id_etiqueta int,
@@ -27,34 +28,40 @@ primary key (id)
 
 
 DELIMITER $$
-CREATE PROCEDURE agregar_personas IN @nombre varchar(100), IN @nom_etiqueta varchar(100) --DROP PROCEDURE agregar_personas;
-AS
-BEGIN
-DECLARE @id_persona INT,
-DECLARE @id_etiqueta INT,
+CREATE PROCEDURE agregar_personas( 
+    IN _nombreEntrante VARCHAR(100),                               
+    IN _nom_etiquetaEntrante VARCHAR(100) ) --DROP PROCEDURE agregar_personas;
+   BEGIN
 
-SET @id_persona = (SELECT id FROM persona WHERE nombre = @nombre);
-SET @id_etiqueta = (SELECT id FROM etiqueta WHERE nombre = @nom_etiqueta);
+    
+    DECLARE _existeNombrePersona BIT DEFAULT 0;
+    DECLARE _existeNombreEtiqueta BIT DEFAULT 0;
+    DECLARE _fkPersona INT;
+    DECLARE _fkEtiqueta INT;
 
-IF @id_persona == NULL THEN/*si no existe la persona la creo */
-BEGIN
-INSERT INTO persona(nombre) VALUES(@nombre);
-SET @id_persona=(SELECT id FROM persona WHERE nombre=@nombre);
-END IF;
+    SET _existeNombrePersona = (SELECT COUNT(*) FROM persona WHERE nombre = _nombreEntrante);
+    SET _existeNombreEtiqueta = (SELECT COUNT(*) FROM etiqueta WHERE nombre = _nom_etiquetaEntrante);
 
-IF @id_etiqueta == NULL THEN /*si no existe la etiquta la creo*/
-BEGIN
-INSERT INTO etiqueta(nombre)VALUES(@nom_etiqueta);
-SET @id_etiqueta=(SELECT id FROM etiqueta WHERE nombre=@nom_etiqueta);
-END IF;
+    IF _existeNombrePersona = 0 THEN
 
-INSERT INTO persona_etiqueta (id_persona,id_etiqueta) VALUES (@id_persona,@id_etiqueta);
+        INSERT INTO persona VALUES(NULL,_nombreEntrante);
+    END IF;
+    SET _fkPersona =(SELECT id FROM persona WHERE nombre = _nombreEntrante);
+    IF _existeNombreEtiqueta = 0 THEN 
+
+        INSERT INTO etiqueta VALUES(NULL,_nom_etiquetaEntrante);
+        
+    SET _fkEtiqueta = (SELECT id FROM etiqueta WHERE nombre = _nom_etiquetaEntrante);
+    END IF;
+
+    INSERT INTO persona_etiqueta VALUES (NULL,_fkPersona,_fkEtiqueta);
+
+   END $$
+   DELIMITER;
 
 
 
 
-END $$
-DELIMITER
 
 CALL agregar_personas ('yenifer','nombre');
 CALL agregar_personas ('maecelo','lendo');
