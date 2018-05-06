@@ -8,27 +8,93 @@
         <title>Listado de Personas</title>
     </head>
     <body>
-        <table class="table">
-  <tr>
-    <th>Hoy</th>
-    <th>Mañana</th>
-    <th>Martes</th>
-  </tr>
-  <tr>
-    <td>Soleado</td>
-    <td>Mayormente soleado</td>
-    <td>Parcialmente nublado</td>
-  </tr>
-  <tr>
-    <td>19°C</td>
-    <td>17°C</td>
-    <td>12°C</td>
-  </tr>
-  <tr>
-    <td>E 13 km/h</td>
-    <td>E 11 km/h</td>
-    <td>S 16 km/h</td>
-  </tr>
-</table>
+        <div class="box">
+            <div class="columns">
+
+                <div class="column is-left">
+
+                    <div class="tile is-parent">
+                        <article class="tile is-child box">
+                            <table class="table is-bordered">
+                                <caption>Lista de personas</caption>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Etiquetas</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>nombre1</td>
+                                    <td>etiqueta1</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>nombre2</td>
+                                    <td>etiqueta2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>nombre3</td>
+                                    <td>etiqueta3</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>nombre4</td>
+                                    <td>etiqueta4</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>nombre5</td> 
+                                    <td>etiqueta5</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>nombre6</td>
+                                    <td>etiqueta6</td>
+                                </tr>
+
+                            </table> 
+                     
+                
+                        <table class="table is-bordered">
+                            <caption>Lista de Etiquetas</caption>
+                            <tr>
+                                <th>id</th>
+
+                                <th>Etiquetas</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>etiqueta1</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>etiqueta2</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>etiqueta3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>etiqueta4</td>
+                            </tr>
+                            <tr>
+                                <td>5</td> 
+                                <td>etiqueta5</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>etiqueta6</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>    
+
+
+            </div>
+
+        </div>
     </body>
 </html>
