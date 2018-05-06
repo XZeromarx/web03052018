@@ -25,42 +25,36 @@ foreign key (id_etiqueta) references etiqueta (id),
 primary key (id)
 );
 
-CREATE PROCEDURE agregar_personas @nombre varchar(100), @nom_etiqueta varchar(100);
-as
-begin
-declare @id_persona int,
-declare @id_etiqueta int,
 
-set @id_persona=(select id from persona where nombre=@nombre);
-set @id_etiqueta=(select id from etiqueta where nombre=@nom_etiqueta);
+DELIMITER $$
+CREATE PROCEDURE agregar_personas IN @nombre varchar(100), IN @nom_etiqueta varchar(100) --DROP PROCEDURE agregar_personas;
+AS
+BEGIN
+DECLARE @id_persona INT,
+DECLARE @id_etiqueta INT,
 
-if @id_persona is null /*si no existe la persona la creo */
-begin
-insert into persona(nombre) values(@nombre);
-set @id_persona=(select id from persona where nombre=@nombre);
-end
+SET @id_persona = (SELECT id FROM persona WHERE nombre = @nombre);
+SET @id_etiqueta = (SELECT id FROM etiqueta WHERE nombre = @nom_etiqueta);
 
-if @id_etiqueta is null /*si no existe la etiquta la creo*/
-begin
-insert into etiqueta(nombre)values (@nom_etiqueta);
-set @id_etiqueta=(select id from etiqueta where nombre=@nom_etiqueta);
-end
+IF @id_persona == NULL THEN/*si no existe la persona la creo */
+BEGIN
+INSERT INTO persona(nombre) VALUES(@nombre);
+SET @id_persona=(SELECT id FROM persona WHERE nombre=@nombre);
+END IF;
 
-insert into persona_etiqueta (id_persona,id_etiqueta) values (@id_persona,@id_etiqueta);
+IF @id_etiqueta == NULL THEN /*si no existe la etiquta la creo*/
+BEGIN
+INSERT INTO etiqueta(nombre)VALUES(@nom_etiqueta);
+SET @id_etiqueta=(SELECT id FROM etiqueta WHERE nombre=@nom_etiqueta);
+END IF;
 
-create view aniadir_personas as
-select
-
-p.nombre as 'Personas',
-e.nombre as 'Etiqueta',
-from persona p
-inner join persona_etiqueta pe on p.id=pe.id_persona
-inner join etiqueta e on pe.id_etiqueta=e.id
-inner join persona p on pe.id_persona=p.id
+INSERT INTO persona_etiqueta (id_persona,id_etiqueta) VALUES (@id_persona,@id_etiqueta);
 
 
 
-end
 
-exec agregar_personas ('yenifer','nombre');
-exec agregar_personas ('maecelo','lendo');
+END $$
+DELIMITER
+
+CALL agregar_personas ('yenifer','nombre');
+CALL agregar_personas ('maecelo','lendo');
