@@ -4,34 +4,39 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <link rel="stylesheet" href="model/bulma-0.7.1/css/bulma.min.css">
         <title>Registros de personas</title>
     </head>
     <body>
-     <div class="container is-centered">
-     <div class="box">
-        <div class="control">
-        <input class="input is-focused" type="text"  placeholder="Ingrese Nombre" >
+
+
+
+        <div class="container is-centered">
+
+            <form action="controller/crearRegistro.php" method="POST">
+                <div class="box">
+                    <div class="control">
+                        <input class="input is-focused" type="text" name="txtNombre" id="txtNombre" placeholder="Ingrese Nombre" >
+                    </div>
+                    <br>
+                    <div class="control">
+                        <input class="input is-focused" type="text" name="txtEtiqueta" id="txtEtiqueta" placeholder="Ingrese Etiquetas" >  </div>
+                    <br>
+                    <input class="button is-primary is-outlined" type="submit" value="Registrar"></input>
+                    <br>
+                    </br>
+
+
+                </div>
+
+
+            </form>
+
         </div>
-        <br>
-                    
-    <div class="control">
-        <input class="input is-focused" type="text"  placeholder="Ingrese Etiquetas" >  </div>
-        <br>
-        
-        <a class="button is-primary is-outlined">Registrar</a>
-        <br>
-        </br>
-         <progress class="progress is-primary" value="0" max="100">30%</progress>   
-                
-          
-  
-    </div>
-    </div>
-   
-    
-    
-       
-   
+
+
+
+
+
     </body>
 </html>
