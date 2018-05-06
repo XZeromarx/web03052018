@@ -8,7 +8,7 @@ class Conexion{ /* creo la siguiente clase conexion */
     public function __construct($bdname) { /* creo el constructor en donde le paso los parametros de la clase conexion*/
         $this->bdname =$bdname ;
         $this->user='root';
-        $this->pass='chopper1234';
+        $this->pass='123456';
     }
     
     public function conectar(){

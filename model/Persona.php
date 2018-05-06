@@ -22,7 +22,6 @@ public function __construct() {
  }
 public function setNombre($nombre){
     $this->nombre=$nombre;
-
 }
 
 }

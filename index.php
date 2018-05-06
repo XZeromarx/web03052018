@@ -20,7 +20,7 @@
                     </div>
                     <br>
                     <div class="control">
-                        <input class="input is-focused" type="text" name="txtEtiqueta" id="txtEtiqueta" placeholder="Ingrese Etiquetas" >  </div>
+                        <input class="input is-focused" type="text" name="txtEtiquetas" id="txtEtiquetas" placeholder="Ingrese Etiquetas" >  </div>
                     <br>
                     <input class="button is-primary is-outlined" type="submit" value="Registrar"></input>
                     <br>
