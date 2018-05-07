@@ -31,7 +31,7 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                 <!dentro de un ciclo de personaEtiqueta >
                                 <?php
                                 $i = $d->ejecutarQuery("SELECT COUNT(*) FROM persona");
-                                while ($registro = $resPersEtiqueta->fetch_array()) {
+                                while ($registro = $resPersEtiqueta->fetch_assoc()) {
 
                                     $j = 1;
                                     ?>

@@ -23,14 +23,13 @@ class Data {
         $rs = $this->con->ejecutar("SELECT * FROM etiqueta;");
         $this->con->desconectar();
         return $rs;
-        
     }
 
     public function listarPersonaEtiquetas() {
 
         $this->con->conectar();
 
-        $rs = $this->con->ejecutar("");
+        $rs = $this->con->ejecutar("SELECT id AS 'ID', nombre AS 'Nombre Persona' FROM persona;");
 
         $this->con->desconectar();
         return $rs;
