@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php 
+<?php
 REQUIRE_ONCE("../model/Data.php");
 $d = new Data();
 $resEtiquetas = $d->listarEtiquetas();
@@ -31,58 +31,54 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                 <!dentro de un ciclo de personaEtiqueta >
                                 <?php
                                 $i = $d->ejecutarQuery("SELECT COUNT(*) FROM persona");
-                                $j = 1;
-                                while($registro = $resPersEtiqueta->fetch_assoc()){
-                                    
-                                    
-                                ?>
-                                <tr>
-                                    <?php
-                                    while ($i >= $j){
-                                        $pe = $d->ejecutarQuery("SELECT nombrePersona('".$j."');");
-                                    
-                                    ?>
-                                    <td><?php echo $registro['ID']?></td>
-                                    <td><?php echo $registro['Nombre Persona']?></td>
-                                    
-                                    <td><?php echo $pe?></td>
-                                    <?php 
-                                    
-                                    
-                                    $j +=1;
-                                    
-                                    }?>
-                                </tr>
-                                <!dentro de un ciclo de personaEtiqueta ^>
-                                
-                                <?php }?>
-                                
-                            </table> 
-                     
-                
-                        <table class="table is-bordered">
-                            <caption>Lista de Etiquetas</caption>
-                            <tr>
-                                <th>id</th>
-                                <th>Etiquetas</th>
-                            </tr>
-                            
-                            <!Dentro de ciclo etiquetas>
-                               
-                            <?php 
-                            while($etiqueta = $resEtiquetas->fetch_assoc()){
-                             ?>   
-                            
-                            <tr>
-                                <td><?php echo $etiqueta['id'] ?></td>
-                                <td><?php echo $etiqueta['nombre']?></td>
-                            </tr>
-                            
-                            <?php } ?>
-                            
-                            <!Dentro de ciclo etiquetas>
+                                while ($registro = $resPersEtiqueta->fetch_array()) {
 
-                        </table>
+                                    $j = 1;
+                                    ?>
+                                    <tr>
+                                        <?php
+                                        while ($i >= $j) {
+                                            $pe = $d->ejecutarQuery("SELECT nombrePersona('" . $j . "');");
+                                            ?>
+                                            <td><?php echo $registro['ID'] ?></td>
+                                            <td><?php echo $registro['Nombre Persona'] ?></td>
+
+                                            <td><?php echo $pe ?></td>
+                                            <?php
+                                            $j += 1;
+                                        }
+                                        ?>
+                                    </tr>
+                                    <!dentro de un ciclo de personaEtiqueta ^>
+
+                                <?php } ?>
+
+                            </table> 
+
+
+                            <table class="table is-bordered">
+                                <caption>Lista de Etiquetas</caption>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Etiquetas</th>
+                                </tr>
+
+                                <!Dentro de ciclo etiquetas>
+
+                                <?php
+                                while ($etiqueta = $resEtiquetas->fetch_assoc()) {
+                                    ?>   
+
+                                    <tr>
+                                        <td><?php echo $etiqueta['id'] ?></td>
+                                        <td><?php echo $etiqueta['nombre'] ?></td>
+                                    </tr>
+
+                                <?php } ?>
+
+                                <!Dentro de ciclo etiquetas>
+
+                            </table>
                     </div>
                 </div>    
 
