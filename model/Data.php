@@ -29,11 +29,11 @@ class Data {
 
         $this->con->conectar();
 
-        $rs = $this->con->ejecutar("SELECT pe.id AS 'ID', p.nombre AS 'Nombre Persona', e.nombre AS 'Etiqueta' FROM persona_etiqueta"
-                . "                 INNER JOIN persona_etiqueta pe ON pe.id_persona = p.id"
-                . "                 INNER JOIN persona_etiqueta pe ON pe.id_etiqueta = e.id"
-                . "                 WHERE pe.id_persona = p.id AND"
-                . "                 pe.id_etiqueta = e.id;");
+        $rs = $this->con->ejecutar("SELECT reg.id AS 'ID', p.nombre AS 'Nombre Persona', e.nombre AS 'Etiqueta' FROM persona_etiqueta reg
+INNER JOIN persona p ON reg.id_persona = p.id
+INNER JOIN etiqueta e ON reg.id_etiqueta = e.id
+WHERE reg.id_persona = p.id AND
+reg.id_etiqueta = e.id;");
 
         $this->con->desconectar();
         return $rs;

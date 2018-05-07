@@ -107,16 +107,27 @@ END $$
 DELIMITER;
 -- PEGAMENTO DE ETIQUETAS
 
-SELECT GROUP_CONCAT(e.nombre)  
+SELECT pe.id, p.nombre, e.nombre  
 FROM persona_etiqueta pe
 INNER JOIN persona p ON p.id = pe.id_persona
 INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
 
 WHERE
-p.nombre = 'marcelo' AND
+p.id = pe.id_persona AND
 e.id = pe.id_etiqueta;
 -- muestra las etiquetas correspondientes al nombre
 
 CALL agregar_personas ('aasdsd','nombrffe');
 CALL agregar_personas ('maecelo','asdaaasd');
 CALL agregar_personas ('marcelo','123111111sd');
+
+
+--select de todo
+SELECT reg.id AS 'ID', p.nombre AS 'Nombre Persona', e.nombre AS 'Etiqueta' FROM persona_etiqueta reg
+INNER JOIN persona p ON reg.id_persona = p.id
+INNER JOIN etiqueta e ON reg.id_etiqueta = e.id
+WHERE reg.id_persona = p.id AND
+reg.id_etiqueta = e.id;
+
+
+SELECT COUNT(*) FROM persona;
