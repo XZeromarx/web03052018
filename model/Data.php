@@ -16,4 +16,12 @@ class Data {
         $this->con->ejecutar($query);
         $this->con->desconectar();
     }
+    
+    public function listarEtiquetas(){
+        
+        $this->con->conectar();
+        $rs = $this->con->ejecutar("SELECT * FROM etiqueta");
+        $this->con->desconectar();
+        return $rs;
+    }
 }

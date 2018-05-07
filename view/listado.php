@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+REQUIRE_ONCE("../model/Data.php");
+$d = new Data();
+?>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -22,37 +26,13 @@
                                     <th>Nombre</th>
                                     <th>Etiquetas</th>
                                 </tr>
+                                <!dentro de un ciclo de personaEtiqueta >
                                 <tr>
-                                    <td>1</td>
-                                    <td>nombre1</td>
-                                    <td>etiqueta1</td>
+                                    <td>ID</td>
+                                    <td>NOMBRE</td>
+                                    <td>ETIQUETA</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>nombre2</td>
-                                    <td>etiqueta2</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>nombre3</td>
-                                    <td>etiqueta3</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>nombre4</td>
-                                    <td>etiqueta4</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>nombre5</td> 
-                                    <td>etiqueta5</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>nombre6</td>
-                                    <td>etiqueta6</td>
-                                </tr>
-
+                                <!dentro de un ciclo de personaEtiqueta ^>
                             </table> 
                      
                 
@@ -60,33 +40,26 @@
                             <caption>Lista de Etiquetas</caption>
                             <tr>
                                 <th>id</th>
-
                                 <th>Etiquetas</th>
                             </tr>
+                            
+                            <!Dentro de ciclo etiquetas>
+                               
+                            
+                          
+                            
+                            <?php 
+                            while($etiqueta = $d->listarEtiquetas()->fetchArray()){
+                             ?>   
                             <tr>
-                                <td>1</td>
-                                <td>etiqueta1</td>
+                                <td><?php echo $etiqueta['id'] ?></td>
+                                <td><?php echo $etiqueta['nombre']?></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>etiqueta2</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>etiqueta3</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>etiqueta4</td>
-                            </tr>
-                            <tr>
-                                <td>5</td> 
-                                <td>etiqueta5</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>etiqueta6</td>
-                            </tr>
+                            <?php }?>
+                            
+                            
+                           
+                            <!Dentro de ciclo etiquetas>
 
                         </table>
                     </div>

@@ -74,9 +74,17 @@ CREATE PROCEDURE agregar_personas(
    DELIMITER;
 
 
+SELECT * FROM persona_etiqueta pe
+INNER JOIN persona p ON p.id = pe.id_persona
+INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
+WHERE
+p.id = pe.id_persona AND
+e.id = pe.id_etiqueta;
+
+
 
 
 
 CALL agregar_personas ('asd','nombre');
-CALL agregar_personas ('maecelo','lendo');
-CALL agregar_personas ('marcelo','asdasd');
+CALL agregar_personas ('maecelo','asdaaasd');
+CALL agregar_personas ('marcelo','asdssssasd');
