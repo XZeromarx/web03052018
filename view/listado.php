@@ -30,9 +30,10 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta >
                                 <?php
-                                $i = $d->ejecutarQuery("SELECT COUNT(*) FROM persona");
+                                $indice = $d->ejecutarQuery("SELECT COUNT(*) FROM persona");
+                                $i = mysqli_result($indice,0,'COUNT');
                                 while ($registro = $resPersEtiqueta->fetch_assoc()) {
-                                    echo 'asdasd';
+                                    
                                     $j = 1;
                                     ?>
                                     <tr>
