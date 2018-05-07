@@ -26,7 +26,7 @@ FOREIGN KEY (id_etiqueta) REFERENCES etiqueta (id),
 PRIMARY KEY (id)
 );
 
-SELECT * FROM etiqueta
+SELECT * FROM etiqueta;
 
 WHERE
 INNER JOIN persona_etiqueta.id_persona = persona.id
@@ -74,32 +74,48 @@ CREATE PROCEDURE agregar_personas(
    DELIMITER;
 
 
+--rescatar nombre de persona
 DELIMITER $$
-CREATE PROCEDURE personaEtiqueta()
+CREATE FUNCTION nombrePersona(_contNombres INT) RETURNS VARCHAR(300) -- DROP FUNCTION nombrePersona
 BEGIN
-DECLARE _cantPersonas INT = (SELECT COUNT(*) FROM persona)
+DECLARE _nombrePersona VARCHAR(100);
+DECLARE _i INT;
+DECLARE _etiquetasPeg VARCHAR(300);
 
-WHILE _cantPersonas > 0 DO
-
-DECLARE _nombrePersona VARCHAR(100) = (SELECT nombre FROM persona WHERE id = _cantPersonas);
-
-END WHILE
-
-
-
+SET _i = (_contNombres);
+SET _nombrePersona = (SELECT nombre FROM persona WHERE id = _i);
+SET _etiquetasPeg = (SELECT etiquetasDelNombre(_nombrePersona));
+RETURN _etiquetasPeg;
 END $$
 DELIMITER;
+--rescatar nombre de persona
 
+-- PEGAMENTO DE ETIQUETAS
+DELIMITER $$
+CREATE FUNCTION etiquetasDelNombre(_nombreDePersona VARCHAR(100)) RETURNS VARCHAR(300)
+BEGIN
+DECLARE _etiquetasPegadas VARCHAR(300);
+SET _etiquetasPegadas =                    (SELECT GROUP_CONCAT(e.nombre)  
+                                           FROM persona_etiqueta pe
+                                           INNER JOIN persona p ON p.id = pe.id_persona
+                                           INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
+                                           WHERE
+                                           p.nombre = _nombreDePersona AND
+                                           e.id = pe.id_etiqueta); 
+RETURN _etiquetasPegadas;
+END $$
+DELIMITER;
+-- PEGAMENTO DE ETIQUETAS
 
-SELECT e.nombre  
+SELECT GROUP_CONCAT(e.nombre)  
 FROM persona_etiqueta pe
 INNER JOIN persona p ON p.id = pe.id_persona
 INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
 
 WHERE
-p.nombre = 'aasdsd' AND
+p.nombre = 'marcelo' AND
 e.id = pe.id_etiqueta;
-
+-- muestra las etiquetas correspondientes al nombre
 
 CALL agregar_personas ('aasdsd','nombrffe');
 CALL agregar_personas ('maecelo','asdaaasd');

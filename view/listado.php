@@ -29,13 +29,29 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                     <th>Etiquetas</th>
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta >
-                                <?php while($registro = $resPersEtiqueta->fetch_assoc()){
+                                <?php
+                                $i = $d->ejecutarQuery("SELECT COUNT(*) FROM persona");
+                                $j = 1;
+                                while($registro = $resPersEtiqueta->fetch_assoc()){
+                                    
+                                    
                                 ?>
                                 <tr>
+                                    <?php
+                                    while ($i >= $j){
+                                        $pe = $d->ejecutarQuery("SELECT nombrePersona('".$j."');");
+                                    
+                                    ?>
                                     <td><?php echo $registro['ID']?></td>
                                     <td><?php echo $registro['Nombre Persona']?></td>
                                     
-                                    <td><?php echo $registro['Nombre Etiqueta']?></td>
+                                    <td><?php echo $pe?></td>
+                                    <?php 
+                                    
+                                    
+                                    $j +=1;
+                                    
+                                    }?>
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta ^>
                                 
