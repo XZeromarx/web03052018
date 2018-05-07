@@ -19,11 +19,11 @@ PRIMARY KEY (id)
 
 CREATE TABLE persona_etiqueta(  
 id INT AUTO_INCREMENT,
-id_persona int,
-id_etiqueta int,
-foreign key (id_persona) REFERENCES persona (id),
-foreign key (id_etiqueta) references etiqueta (id),
-primary key (id)
+id_persona INT,
+id_etiqueta INT,
+FOREIGN KEY(id_persona) REFERENCES persona (id),
+FOREIGN KEY (id_etiqueta) REFERENCES etiqueta (id),
+PRIMARY KEY (id)
 );
 
 SELECT * FROM etiqueta
@@ -32,7 +32,7 @@ WHERE
 INNER JOIN persona_etiqueta.id_persona = persona.id
 INNER JOIN persona_etiqueta.id_etiqueta = etiqueta.id; 
 
-
+mostrar nombre de etiqueta donde el id de la persona sea  igual al id del registro
 
 DELIMITER $$
 CREATE PROCEDURE agregar_personas( 
@@ -74,21 +74,33 @@ CREATE PROCEDURE agregar_personas(
    DELIMITER;
 
 
-SELECT p.nombre AS 'Nombre Persona',
-       e.nombre AS 'Nombre Etiqueta',
-       pe.id AS 'ID'  
+DELIMITER $$
+CREATE PROCEDURE personaEtiqueta()
+BEGIN
+DECLARE _cantPersonas INT = (SELECT COUNT(*) FROM persona)
+
+WHILE _cantPersonas > 0 DO
+
+DECLARE _nombrePersona VARCHAR(100) = (SELECT nombre FROM persona WHERE id = _cantPersonas);
+
+END WHILE
+
+
+
+END $$
+DELIMITER;
+
+
+SELECT e.nombre  
 FROM persona_etiqueta pe
 INNER JOIN persona p ON p.id = pe.id_persona
 INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
 
 WHERE
-p.id = pe.id_persona AND
+p.nombre = 'aasdsd' AND
 e.id = pe.id_etiqueta;
 
 
-
-
-
-CALL agregar_personas ('asd','nombre');
+CALL agregar_personas ('aasdsd','nombrffe');
 CALL agregar_personas ('maecelo','asdaaasd');
-CALL agregar_personas ('marcelo','asdssssasd');
+CALL agregar_personas ('marcelo','123111111sd');

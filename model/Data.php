@@ -40,6 +40,7 @@ class Data {
                                     e.id = pe.id_etiqueta;");
 
         $this->con->desconectar();
+        return $rs;
     }
 
 }

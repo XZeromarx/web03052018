@@ -9,6 +9,7 @@ $d = new Data();
 
 $arrayEtiquetas = explode(",", $etiquetas);
 
+
 foreach ($arrayEtiquetas as $item) {
 
     $query = "CALL agregar_personas ('$nombre','$item')";

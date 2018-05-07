@@ -32,8 +32,9 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                 <?php while($registro = $resPersEtiqueta->fetch_assoc()){
                                 ?>
                                 <tr>
-                                    <td><?php echo $registro['id']?></td>
+                                    <td><?php echo $registro['ID']?></td>
                                     <td><?php echo $registro['Nombre Persona']?></td>
+                                    
                                     <td><?php echo $registro['Nombre Etiqueta']?></td>
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta ^>
