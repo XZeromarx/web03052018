@@ -2,6 +2,7 @@
 <?php 
 REQUIRE_ONCE("../model/Data.php");
 $d = new Data();
+$rs = $d->listarEtiquetas();
 ?>
 <html lang="en">
     <head>
@@ -49,7 +50,8 @@ $d = new Data();
                           
                             
                             <?php 
-                            while($etiqueta = $d->listarEtiquetas()->fetchArray()){
+                            
+                            while($dato = $rs->fetch_assoc()){
                              ?>   
                             <tr>
                                 <td><?php echo $etiqueta['id'] ?></td>
