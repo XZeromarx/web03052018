@@ -2,7 +2,8 @@
 <?php 
 REQUIRE_ONCE("../model/Data.php");
 $d = new Data();
-$rs = $d->listarEtiquetas();
+$resEtiquetas = $d->listarEtiquetas();
+$resPersEtiqueta = $d->listarPersonaEtiquetas();
 ?>
 <html lang="en">
     <head>
@@ -28,12 +29,17 @@ $rs = $d->listarEtiquetas();
                                     <th>Etiquetas</th>
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta >
+                                <?php while($registro = $resPersEtiqueta->fetch_assoc()){
+                                ?>
                                 <tr>
-                                    <td>ID</td>
-                                    <td>NOMBRE</td>
-                                    <td>ETIQUETA</td>
+                                    <td><?php echo $registro['id']?></td>
+                                    <td><?php echo $registro['Nombre Persona']?></td>
+                                    <td><?php echo $registro['Nombre Etiqueta']?></td>
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta ^>
+                                
+                                <?php }?>
+                                
                             </table> 
                      
                 
@@ -46,21 +52,17 @@ $rs = $d->listarEtiquetas();
                             
                             <!Dentro de ciclo etiquetas>
                                
-                            
-                          
-                            
                             <?php 
-                            
-                            while($dato = $rs->fetch_assoc()){
+                            while($etiqueta = $resEtiquetas->fetch_assoc()){
                              ?>   
+                            
                             <tr>
                                 <td><?php echo $etiqueta['id'] ?></td>
                                 <td><?php echo $etiqueta['nombre']?></td>
                             </tr>
-                            <?php }?>
                             
+                            <?php } ?>
                             
-                           
                             <!Dentro de ciclo etiquetas>
 
                         </table>

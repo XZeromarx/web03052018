@@ -74,9 +74,13 @@ CREATE PROCEDURE agregar_personas(
    DELIMITER;
 
 
-SELECT * FROM persona_etiqueta pe
+SELECT p.nombre AS 'Nombre Persona',
+       e.nombre AS 'Nombre Etiqueta',
+       pe.id AS 'ID'  
+FROM persona_etiqueta pe
 INNER JOIN persona p ON p.id = pe.id_persona
 INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
+
 WHERE
 p.id = pe.id_persona AND
 e.id = pe.id_etiqueta;
