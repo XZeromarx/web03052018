@@ -35,6 +35,7 @@ $resPers = $d->listarPersona();
                                 while ($persona = $resPers->fetch_assoc()) {
                                     ?>
                                     
+                                <?php$res = $d->etiquetaPers($persona['id']) ?>
 
                                     <tr>
                                         <td><?php echo $persona['id'] ?></td>
