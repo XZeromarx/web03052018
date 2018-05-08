@@ -26,14 +26,6 @@ FOREIGN KEY (id_etiqueta) REFERENCES etiqueta (id),
 PRIMARY KEY (id)
 );
 
-SELECT * FROM etiqueta;
-
-WHERE
-INNER JOIN persona_etiqueta.id_persona = persona.id
-INNER JOIN persona_etiqueta.id_etiqueta = etiqueta.id; 
-
-mostrar nombre de etiqueta donde el id de la persona sea  igual al id del registro
-
 DELIMITER $$
 CREATE PROCEDURE agregar_personas( 
     IN _nombreEntrante VARCHAR(100),                               
@@ -117,9 +109,7 @@ p.id = pe.id_persona AND
 e.id = pe.id_etiqueta;
 -- muestra las etiquetas correspondientes al nombre
 
-CALL agregar_personas ('aasdsd','nombrffe');
-CALL agregar_personas ('maecelo','asdaaasd');
-CALL agregar_personas ('marcelo','123111111sd');
+CALL agregar_personas ('nom1','e1');
 
 
 --select de todo
@@ -130,4 +120,7 @@ WHERE reg.id_persona = p.id AND
 reg.id_etiqueta = e.id;
 
 
-SELECT COUNT(*) FROM persona;
+SELECT * FROM persona;
+
+USE mysql;
+UPDATE user SET password=PASSWORD('Olakease123') WHERE user='root';

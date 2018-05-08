@@ -38,5 +38,14 @@ class Data {
         $this->con->desconectar();
         return $rs;
     }
+    
+    public function contarNombres(){
+        $this->con->conectar();
+        $rs =$this->con->ejecutar("SELECT COUNT(*) FROM persona;");
+        $this->con->desconectar();
+        return $rs;
+        
+    }
+    
 
 }
