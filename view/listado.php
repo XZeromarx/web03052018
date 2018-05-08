@@ -31,7 +31,7 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                 <!dentro de un ciclo de personaEtiqueta >
                                 <?php
                                 $indice = $d->contarNombres();
-                                $i = $indice->fetch_assoc();
+                                $i =(int) mysqli_fetch_assoc($indice);
                                 while ($registro = $resPersEtiqueta->fetch_assoc()) {
                                     
                                     $j = 1;
@@ -39,7 +39,8 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                     <tr>
                                         <?php
                                         while ($i >= $j) {
-                                            $pe = $d->ejecutarQuery("");
+                                            $ep = $d->etiquetaPers($j);
+                                            $pe = $ep->fetch_assoc();
                                             ?>
                                             <td><?php echo $registro['ID'] ?></td>
                                             <td><?php echo $registro['Nombre Persona'] ?></td>

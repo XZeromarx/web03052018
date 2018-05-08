@@ -47,5 +47,12 @@ class Data {
         
     }
     
+    public function etiquetaPers($j){
+        $this->con->conectar();
+        $rs =$this->con->ejecutar("SELECT nombrePersona(".$j.") AS 'rs';");
+        $this->con->desconectar();
+        return $rs;
+        
+    }
 
 }
