@@ -68,15 +68,11 @@ CREATE PROCEDURE agregar_personas(
 
 --rescatar nombre de persona
 DELIMITER $$
-CREATE FUNCTION nombrePersona(_contNombres INT) RETURNS VARCHAR(300) -- DROP FUNCTION nombrePersona
+CREATE FUNCTION nombrePersona(_idDePersona INT) RETURNS VARCHAR(300) -- DROP FUNCTION nombrePersona
 BEGIN
-DECLARE _nombrePersona VARCHAR(100);
-DECLARE _i INT;
+DECLARE _idRecibido VARCHAR(100);
 DECLARE _etiquetasPeg VARCHAR(300);
-
-SET _i = (_contNombres);
-SET _nombrePersona = (SELECT nombre FROM persona WHERE id = _i);
-SET _etiquetasPeg = (SELECT etiquetasDelNombre(_nombrePersona));
+SET _etiquetasPeg = (SELECT etiquetasDelNombre(_idRecibido));
 RETURN _etiquetasPeg;
 END $$
 DELIMITER;
@@ -84,7 +80,7 @@ DELIMITER;
 
 -- PEGAMENTO DE ETIQUETAS
 DELIMITER $$
-CREATE FUNCTION etiquetasDelNombre(_nombreDePersona VARCHAR(100)) RETURNS VARCHAR(300)
+CREATE FUNCTION etiquetasDelNombre(idPersona VARCHAR(100)) RETURNS VARCHAR(300) --DROP FUNCTION etiquetasDelNombre
 BEGIN
 DECLARE _etiquetasPegadas VARCHAR(300);
 SET _etiquetasPegadas =                    (SELECT GROUP_CONCAT(e.nombre)  
@@ -92,24 +88,14 @@ SET _etiquetasPegadas =                    (SELECT GROUP_CONCAT(e.nombre)
                                            INNER JOIN persona p ON p.id = pe.id_persona
                                            INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
                                            WHERE
-                                           p.nombre = _nombreDePersona AND
+                                           p.id = idPersona AND
                                            e.id = pe.id_etiqueta); 
 RETURN _etiquetasPegadas;
 END $$
 DELIMITER;
 -- PEGAMENTO DE ETIQUETAS
 
-SELECT pe.id, p.nombre, e.nombre  
-FROM persona_etiqueta pe
-INNER JOIN persona p ON p.id = pe.id_persona
-INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
-
-WHERE
-p.id = pe.id_persona AND
-e.id = pe.id_etiqueta;
--- muestra las etiquetas correspondientes al nombre
-
-CALL agregar_personas ('nom1','e1');
+CALL agregar_personas ('nom2','e3');
 
 
 --select de todo
@@ -120,7 +106,4 @@ WHERE reg.id_persona = p.id AND
 reg.id_etiqueta = e.id;
 
 
-SELECT * FROM persona;
 
-USE mysql;
-UPDATE user SET password=PASSWORD('Olakease123') WHERE user='root';

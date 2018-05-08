@@ -25,31 +25,23 @@ class Data {
         return $rs;
     }
 
-    public function listarPersonaEtiquetas() {
+    public function listarPersona() {
 
         $this->con->conectar();
 
-        $rs = $this->con->ejecutar("SELECT reg.id AS 'ID', p.nombre AS 'Nombre Persona', e.nombre AS 'Etiqueta' FROM persona_etiqueta reg
+        $rs = $this->con->ejecutar("SELECT reg.id AS 'ID', p.nombre AS 'nombre' FROM persona_etiqueta reg
                                     INNER JOIN persona p ON reg.id_persona = p.id
-                                    INNER JOIN etiqueta e ON reg.id_etiqueta = e.id
-                                    WHERE reg.id_persona = p.id AND
-                                    reg.id_etiqueta = e.id;");
+                                    WHERE reg.id_persona = p.id;");
 
         $this->con->desconectar();
         return $rs;
     }
     
-    public function contarNombres(){
-        $this->con->conectar();
-        $rs =$this->con->ejecutar("SELECT COUNT(*) FROM persona;");
-        $this->con->desconectar();
-        return $rs;
-        
-    }
     
-    public function etiquetaPers($j){
+    
+    public function etiquetaPers($idPersona){
         $this->con->conectar();
-        $rs =$this->con->ejecutar("SELECT nombrePersona(".$j.") AS 'rs';");
+        $rs =$this->con->ejecutar("SELECT nombrePersona(".$idPersona.") AS 'rs';");
         $this->con->desconectar();
         return $rs;
         

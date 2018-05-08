@@ -3,7 +3,7 @@
 REQUIRE_ONCE("../model/Data.php");
 $d = new Data();
 $resEtiquetas = $d->listarEtiquetas();
-$resPersEtiqueta = $d->listarPersonaEtiquetas();
+$resPers = $d->listarPersona();
 ?>
 <html lang="en">
     <head>
@@ -29,31 +29,30 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                     <th>Etiquetas</th>
                                 </tr>
                                 <!dentro de un ciclo de personaEtiqueta >
-                                <?php
-                                $indice = $d->contarNombres();
-                                $i =(int) mysqli_fetch_assoc($indice);
-                                while ($registro = $resPersEtiqueta->fetch_assoc()) {
-                                    
-                                    $j = 1;
-                                    ?>
-                                    <tr>
-                                        <?php
-                                        while ($i >= $j) {
-                                            $ep = $d->etiquetaPers($j);
-                                            $pe = $ep->fetch_assoc();
-                                            ?>
-                                            <td><?php echo $registro['ID'] ?></td>
-                                            <td><?php echo $registro['Nombre Persona'] ?></td>
 
-                                            <td><?php echo $pe ?></td>
-                                            <?php
-                                            $j += 1;
-                                        }
-                                        ?>
+
+                                <?php
+                                while ($persona = $resPers->mysqli_fetch_assoc()) {
+                                    ?>
+
+
+                                    <tr>
+                                        <td><?php echo $persona['id'] ?></td>
+                                        <td><?php echo $persona['nombre'] ?></td>
+
+                                        <?php $res = $d->etiquetaPers($persona['id']) ?>
+
+                                        <td> <?php echo $res['rs'] ?> </td>
                                     </tr>
-                                    <!dentro de un ciclo de personaEtiqueta ^>
 
                                 <?php } ?>
+
+
+
+
+                                <!dentro de un ciclo de personaEtiqueta ^>
+
+
 
                             </table> 
 
@@ -72,8 +71,8 @@ $resPersEtiqueta = $d->listarPersonaEtiquetas();
                                     ?>   
 
                                     <tr>
-                                        <td><?php echo $etiqueta['id'] ?></td>
-                                        <td><?php echo $etiqueta['nombre'] ?></td>
+                                        <td> <?php echo $etiqueta['id'] ?>    </td>
+                                        <td> <?php echo $etiqueta['nombre'] ?></td>
                                     </tr>
 
                                 <?php } ?>
