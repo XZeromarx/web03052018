@@ -29,9 +29,7 @@ class Data {
 
         $this->con->conectar();
 
-        $rs = $this->con->ejecutar("SELECT reg.id AS 'ID', p.nombre AS 'nombre' FROM persona_etiqueta reg
-                                    INNER JOIN persona p ON reg.id_persona = p.id
-                                    WHERE reg.id_persona = p.id;");
+        $rs = $this->con->ejecutar("SELECT * FROM persona;");
 
         $this->con->desconectar();
         return $rs;

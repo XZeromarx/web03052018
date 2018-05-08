@@ -32,15 +32,15 @@ $resPers = $d->listarPersona();
 
 
                                 <?php
-                                while ($persona = $resPers->mysqli_fetch_assoc()) {
+                                while ($persona = $resPers->fetch_assoc()) {
                                     ?>
-
+                                    
 
                                     <tr>
                                         <td><?php echo $persona['id'] ?></td>
                                         <td><?php echo $persona['nombre'] ?></td>
 
-                                        <?php $res = $d->etiquetaPers($persona['id']) ?>
+
 
                                         <td> <?php echo $res['rs'] ?> </td>
                                     </tr>
