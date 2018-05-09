@@ -34,16 +34,18 @@ $resPers = $d->listarPersona();
                                 <?php
                                 while ($persona = $resPers->fetch_assoc()) {
                                     ?>
-                                    
-                                <?php$res = $d->etiquetaPers($persona['id']) ?>
+
+                                    <?php $res = $d->etiquetaPers($persona['id']);
+                                    ?>
+
 
                                     <tr>
-                                        <td><?php echo $persona['id'] ?></td>
-                                        <td><?php echo $persona['nombre'] ?></td>
+                                        <td><?php echo $persona['id']; ?></td>
+                                        <td><?php echo $persona['nombre']; ?></td>
 
-
-
-                                        <td> <?php echo $res['rs'] ?> </td>
+                                        <?php while($r = $res->fetch_assoc()) { ?>
+                                            <td> <?php echo $r['etiquetas'] ?> </td>
+                                        <?php }?>
                                     </tr>
 
                                 <?php } ?>
@@ -68,12 +70,12 @@ $resPers = $d->listarPersona();
                                 <!Dentro de ciclo etiquetas>
 
                                 <?php
-                                while ($etiqueta = $resEtiquetas->fetch_assoc()) {
+                                while ($et = $resEtiquetas->fetch_assoc()) {
                                     ?>   
 
                                     <tr>
-                                        <td> <?php echo $etiqueta['id'] ?>    </td>
-                                        <td> <?php echo $etiqueta['nombre'] ?></td>
+                                        <td> <?php echo $et['id'] ?>    </td>
+                                        <td> <?php echo $et['nombre'] ?></td>
                                     </tr>
 
                                 <?php } ?>

@@ -66,31 +66,20 @@ CREATE PROCEDURE agregar_personas(
    DELIMITER;
 
 
---rescatar nombre de persona
-DELIMITER $$
-CREATE FUNCTION nombrePersona(_idDePersona INT) RETURNS VARCHAR(300) -- DROP FUNCTION nombrePersona
-BEGIN
-DECLARE _idRecibido VARCHAR(100);
-DECLARE _etiquetasPeg VARCHAR(300);
-SET _etiquetasPeg = (SELECT etiquetasDelNombre(_idRecibido));
-RETURN _etiquetasPeg;
-END $$
-DELIMITER;
---rescatar nombre de persona
+
 
 -- PEGAMENTO DE ETIQUETAS
 DELIMITER $$
-CREATE FUNCTION etiquetasDelNombre(idPersona VARCHAR(100)) RETURNS VARCHAR(300) --DROP FUNCTION etiquetasDelNombre
+CREATE PROCEDURE etiquetasDelNombre(idPersona VARCHAR(100)) --DROP PROCEDURE etiquetasDelNombre
 BEGIN
-DECLARE _etiquetasPegadas VARCHAR(300);
-SET _etiquetasPegadas =                    (SELECT GROUP_CONCAT(e.nombre)  
-                                           FROM persona_etiqueta pe
-                                           INNER JOIN persona p ON p.id = pe.id_persona
-                                           INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
-                                           WHERE
-                                           p.id = idPersona AND
-                                           e.id = pe.id_etiqueta); 
-RETURN _etiquetasPegadas;
+SELECT GROUP_CONCAT(e.nombre SEPARATOR ',') AS 'etiquetas'
+FROM persona_etiqueta pe
+INNER JOIN persona p ON p.id = pe.id_persona
+INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
+WHERE
+p.id = idPersona AND
+e.id = pe.id_etiqueta;
+
 END $$
 DELIMITER;
 -- PEGAMENTO DE ETIQUETAS
@@ -108,3 +97,17 @@ reg.id_etiqueta = e.id;
 
 
 
+SELECT nombrePersona('1') AS 'rs';
+
+
+SELECT GROUP_CONCAT(e.nombre SEPARATOR ',') AS 'etiquetas'
+FROM persona_etiqueta pe
+INNER JOIN persona p ON p.id = pe.id_persona
+INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
+WHERE
+p.id = '2' AND
+e.id = pe.id_etiqueta;
+
+
+
+call etiquetasDelNombre('2');

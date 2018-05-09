@@ -34,15 +34,19 @@ class Data {
         $this->con->desconectar();
         return $rs;
     }
-    
-    
-    
-    public function etiquetaPers($idPersona){
+
+    public function etiquetaPers($idPersona) {
+        echo 'asd';
         $this->con->conectar();
-        $rs =$this->con->ejecutar("SELECT nombrePersona(".$idPersona.") AS 'rs';");
+        $rs = $this->con->ejecutar("SELECT GROUP_CONCAT(e.nombre SEPARATOR ',') AS 'etiquetas'
+                                    FROM persona_etiqueta pe
+                                    INNER JOIN persona p ON p.id = pe.id_persona
+                                    INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
+                                    WHERE
+                                    p.id = '" . $idPersona . "' AND
+                                    e.id = pe.id_etiqueta;");
         $this->con->desconectar();
         return $rs;
-        
     }
 
 }
