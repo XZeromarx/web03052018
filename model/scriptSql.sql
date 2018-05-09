@@ -1,31 +1,36 @@
-CREATE DATABASE bd_web; -- drop database bd_web;
-                        -- USE mysql;
+CREATE DATABASE bd_web; -- DROP DATABASE bd_web;
+                        
 
-USE bd_web;
+USE bd_web; -- USE mysql;
 
 
-CREATE TABLE persona(
+CREATE TABLE persona( --DROP TABLE persona;
 id INT AUTO_INCREMENT,
 nombre VARCHAR (100),
 PRIMARY KEY (id)
-);
+); -- SELECT * FROM persona
 
 
-CREATE TABLE etiqueta(
+CREATE TABLE etiqueta( -- DROP TABLE etiqueta;
 id INT AUTO_INCREMENT,
 nombre VARCHAR(100),
 PRIMARY KEY (id)
-);
+); -- SELECT * FROM etiqueta;
 
-CREATE TABLE persona_etiqueta(  
+CREATE TABLE persona_etiqueta( -- DROP TABLE persona_etiqueta;
 id INT AUTO_INCREMENT,
 id_persona INT,
 id_etiqueta INT,
 FOREIGN KEY(id_persona) REFERENCES persona (id),
 FOREIGN KEY (id_etiqueta) REFERENCES etiqueta (id),
 PRIMARY KEY (id)
-);
+); -- SELECT * FROM persona_etiqueta;
 
+
+
+-- PROCEDIMIENTO QUE AGREGA PERSONAS Y ETIQUETAS
+-- si no existe la persona registrada, se crea, sino, solo se rescata el id y se le asignan más etiquetas
+-- o mismo con las etiquetas
 DELIMITER $$
 CREATE PROCEDURE agregar_personas( 
     IN _nombreEntrante VARCHAR(100),                               
@@ -64,50 +69,21 @@ CREATE PROCEDURE agregar_personas(
 
    END $$
    DELIMITER;
+-- PROCEDIMIENTO QUE AGREGA PERSONAS Y ETIQUETAS
 
 
-
-
--- PEGAMENTO DE ETIQUETAS
-DELIMITER $$
-CREATE PROCEDURE etiquetasDelNombre(idPersona VARCHAR(100)) --DROP PROCEDURE etiquetasDelNombre
-BEGIN
+-- CONCATENACION DE ETIQUETAS(trae todas las etiquetas juntas en relacion a X nombre)
 SELECT GROUP_CONCAT(e.nombre SEPARATOR ',') AS 'etiquetas'
 FROM persona_etiqueta pe
 INNER JOIN persona p ON p.id = pe.id_persona
 INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
 WHERE
-p.id = idPersona AND
+p.id = 'x' AND
 e.id = pe.id_etiqueta;
-
-END $$
-DELIMITER;
--- PEGAMENTO DE ETIQUETAS
-
-CALL agregar_personas ('nom2','e3');
+-- CONCATENACION DE ETIQUETAS
 
 
---select de todo
-SELECT reg.id AS 'ID', p.nombre AS 'Nombre Persona', e.nombre AS 'Etiqueta' FROM persona_etiqueta reg
-INNER JOIN persona p ON reg.id_persona = p.id
-INNER JOIN etiqueta e ON reg.id_etiqueta = e.id
-WHERE reg.id_persona = p.id AND
-reg.id_etiqueta = e.id;
+-- llamada al procedimiento para agregar personas
+CALL agregar_personas ('nombre','etiqueta');
+-- llamada al procedimiento para agregar personas
 
-
-
-
-SELECT nombrePersona('1') AS 'rs';
-
-
-SELECT GROUP_CONCAT(e.nombre SEPARATOR ',') AS 'etiquetas'
-FROM persona_etiqueta pe
-INNER JOIN persona p ON p.id = pe.id_persona
-INNER JOIN etiqueta e ON e.id = pe.id_etiqueta
-WHERE
-p.id = '2' AND
-e.id = pe.id_etiqueta;
-
-
-
-call etiquetasDelNombre('2');

@@ -14,6 +14,18 @@ $resPers = $d->listarPersona();
         <title>Listado de Personas</title>
     </head>
     <body>
+        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <nav class="navbar-item">
+                    <div class="button is-warning">
+                        <a class="navbar-item is-outlined" href="../index.php">
+                            Inicio
+                        </a>
+                    </div>
+
+                </nav>
+            </div>
+        </nav>
         <div class="box">
             <div class="columns">
 
@@ -21,68 +33,76 @@ $resPers = $d->listarPersona();
 
                     <div class="tile is-parent">
                         <article class="tile is-child box">
-                            <table class="table is-bordered">
-                                <caption>Lista de personas</caption>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Etiquetas</th>
-                                </tr>
-                                <!dentro de un ciclo de personaEtiqueta >
+                            <div class="title">Listado de asignacion de etiquetas</div>
+
+                            <div class="box">
+                                <table class="table is-bordered is-hoverable is-fullwidth is-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre</th>
+                                            <th>Etiquetas</th>
+                                        </tr>
+                                    </thead>
+                                    <!dentro de un ciclo de personaEtiqueta >
 
 
-                                <?php
-                                while ($persona = $resPers->fetch_assoc()) {
-                                    ?>
+                                    <?php
+                                    while ($persona = $resPers->fetch_assoc()) {
+                                        ?>
 
-                                    <?php $res = $d->etiquetaPers($persona['id']);
-                                    ?>
-
-
-                                    <tr>
-                                        <td><?php echo $persona['id']; ?></td>
-                                        <td><?php echo $persona['nombre']; ?></td>
-
-                                        <?php while($r = $res->fetch_assoc()) { ?>
-                                            <td> <?php echo $r['etiquetas'] ?> </td>
-                                        <?php }?>
-                                    </tr>
-
-                                <?php } ?>
+                                        <?php $res = $d->etiquetaPers($persona['id']);
+                                        ?>
 
 
+                                        <tr>
+                                            <td><?php echo $persona['id']; ?></td>
+                                            <td><?php echo $persona['nombre']; ?></td>
 
+                                            <?php while ($r = $res->fetch_assoc()) { ?>
+                                                <td> <?php echo $r['etiquetas'] ?> </td>
+                                            <?php } ?>
+                                        </tr>
 
-                                <!dentro de un ciclo de personaEtiqueta ^>
+                                    <?php } ?>
 
 
 
-                            </table> 
+
+                                    <!dentro de un ciclo de personaEtiqueta ^>
 
 
-                            <table class="table is-bordered">
-                                <caption>Lista de Etiquetas</caption>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Etiquetas</th>
-                                </tr>
 
-                                <!Dentro de ciclo etiquetas>
+                                </table>
+                            </div>
 
-                                <?php
-                                while ($et = $resEtiquetas->fetch_assoc()) {
-                                    ?>   
+                            <div class="box">
+                                <table class="table is-bordered is-hoverable is-fullwidth is-striped">
+                                    <div class="title">Etiquetas registradas</div>
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Etiquetas</th>
+                                        </tr>
+                                    </thead>
+                                    <!Dentro de ciclo etiquetas>
 
-                                    <tr>
-                                        <td> <?php echo $et['id'] ?>    </td>
-                                        <td> <?php echo $et['nombre'] ?></td>
-                                    </tr>
+                                    <?php
+                                    while ($et = $resEtiquetas->fetch_assoc()) {
+                                        ?>   
 
-                                <?php } ?>
+                                        <tr>
+                                            <td> <?php echo $et['id'] ?>    </td>
+                                            <td> <?php echo $et['nombre'] ?></td>
+                                        </tr>
 
-                                <!Dentro de ciclo etiquetas>
+                                    <?php } ?>
 
-                            </table>
+                                    <!Dentro de ciclo etiquetas>
+
+                                </table>
+                            </div>
+
                     </div>
                 </div>    
 

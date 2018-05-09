@@ -36,7 +36,7 @@ class Data {
     }
 
     public function etiquetaPers($idPersona) {
-        echo 'asd';
+        
         $this->con->conectar();
         $rs = $this->con->ejecutar("SELECT GROUP_CONCAT(e.nombre SEPARATOR ',') AS 'etiquetas'
                                     FROM persona_etiqueta pe

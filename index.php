@@ -8,7 +8,18 @@
         <title>Registros de personas</title>
     </head>
     <body>
+        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <nav class="navbar-item">
+                    <div class="button is-warning">
+                        <a class="navbar-item is-outlined" href="view/listado.php">
+                            Listas
+                        </a>
+                    </div>
 
+                </nav>
+            </div>
+        </nav>
 
 
         <div class="container is-centered">
@@ -24,7 +35,8 @@
                     <br>
                     <input class="button is-primary is-outlined" type="submit" value="Registrar"></input>
                     <br>
-                    </br>
+                    <form onsubmit="this.reset()">
+                        </br>
 
 
                 </div>
