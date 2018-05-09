@@ -56,11 +56,11 @@ $resPers = $d->listarPersona();
 
 
                                         <tr>
-                                            <td><?php echo $persona['id']; ?></td>
+                                            <td class="style is-danger"><?php echo $persona['id']; ?></td>
                                             <td><?php echo $persona['nombre']; ?></td>
 
                                             <?php while ($r = $res->fetch_assoc()) { ?>
-                                                <td> <?php echo $r['etiquetas'] ?> </td>
+                                            <td class="style is-primary"> <?php echo $r['etiquetas'] ?> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -92,7 +92,7 @@ $resPers = $d->listarPersona();
                                         ?>   
 
                                         <tr>
-                                            <td> <?php echo $et['id'] ?>    </td>
+                                            <td class="style is-danger> <?php echo $et['id'] ?>    </td>
                                             <td> <?php echo $et['nombre'] ?></td>
                                         </tr>
 
